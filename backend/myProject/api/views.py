@@ -1,14 +1,17 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.renderers import JSONRenderer
 from .models import Book
 from .serializer import BookSerializer
 
 
 @api_view(['GET'])
 def get_books(request):
-    books = Book.objects.all()
-    serializedData = BookSerializer(books, many = True).data
+    books = Book.objects.all()      # Creating model instance
+    serializedData = BookSerializer(books, many = True).data    # Converting model instance to Python DICT / serialization object
+    # json_data = JSONRenderer().render(serializedData)
+    # print(json_data)
     return Response(serializedData)
 
 @api_view(['POST'])
