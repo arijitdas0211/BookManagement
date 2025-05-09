@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.renderers import JSONRenderer
+# from rest_framework.renderers import JSONRenderer
 from .models import Book
 from .serializer import BookSerializer
 
@@ -17,7 +17,7 @@ def get_books(request):
 @api_view(['POST'])
 def create_book(request):
     data = request.data
-    serializer = BookSerializer(data=data)
+    serializer = BookSerializer(data=data)          # Deserialization 
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
